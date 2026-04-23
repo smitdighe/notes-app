@@ -73,13 +73,22 @@ flask-notes-app/
 
 ---
 
-## 🔧 Tech Details
+## 🛠️ Tech Stack
 
-* Backend: Flask (Python)
-* Database: SQLite
-* ORM: SQLAlchemy
-* Frontend: HTML + CSS
-* Rendering: Jinja2 Templates
+### 💻 Programming Languages
+<p>
+  <img src="https://skillicons.dev/icons?i=python" />
+</p>
+
+### 🌐 Web Development
+<p>
+  <img src="https://skillicons.dev/icons?i=html,css,flask" />
+</p>
+
+### 🗄️ Database
+<p>
+  <img src="https://skillicons.dev/icons?i=sqlite" />
+</p>
 
 ---
 
