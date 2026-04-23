@@ -3,10 +3,6 @@
 A clean and minimal **full-stack Notes Web Application** built with Flask.
 Supports full CRUD operations with a responsive UI using only HTML and CSS.
 
----
-
-## 🚀 Overview
-
 This project demonstrates how to build a complete server-rendered web app using Flask without relying on client-side JavaScript.
 
 ---
