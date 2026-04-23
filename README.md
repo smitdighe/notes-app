@@ -82,7 +82,9 @@ flask-notes-app/
 
 ### 🌐 Web Development
 <p>
-  <img src="https://skillicons.dev/icons?i=html,css,flask" />
+  <img src="https://skillicons.dev/icons?i=html" style="margin-right:10px;" />
+  <img src="https://skillicons.dev/icons?i=css" style="margin-right:10px;" />
+  <img src="https://skillicons.dev/icons?i=flask" />
 </p>
 
 ### 🗄️ Database
