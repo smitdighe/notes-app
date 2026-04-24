@@ -1,9 +1,16 @@
 # 📝 Flask Notes App
 
-A clean and minimal **full-stack Notes Web Application** built with Flask.
-Supports full CRUD operations with a responsive UI using only HTML and CSS.
+🚀 **Live Demo:**  
+👉 https://notes-app-d9cm.onrender.com
 
-This project demonstrates how to build a complete server-rendered web app using Flask without relying on client-side JavaScript.
+---
+
+## 🧠 About
+
+A clean and minimal **full-stack Notes Web Application** built with Flask.  
+Supports full CRUD operations with a responsive UI using HTML & CSS.
+
+This project demonstrates how to build a complete **server-rendered web app** without relying on client-side JavaScript.
 
 ---
 
@@ -20,7 +27,7 @@ This project demonstrates how to build a complete server-rendered web app using 
 
 ---
 
-## ⚙️ Installation
+## ⚙️ Run Locally
 
 ```bash
 # Clone repository
@@ -99,4 +106,4 @@ flask-notes-app/
 * 🔍 Search & filter notes
 * 🌙 Dark mode
 * 🔐 Authentication system
-* ☁️ Deployment with PostgreSQL
+
