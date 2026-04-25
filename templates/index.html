@@ -49,9 +49,7 @@
                         <div class="note-header">
                             <h3 class="note-title">{{ note.title }}</h3>
                             <span class="note-date">
-                                {% set date = note.created_at.strftime('%B %d, %Y') %}
-                                {% set time = note.created_at.strftime('%I:%M %p') %}
-                                {{ date }}<br>{{ time }}
+                                {{ note.created_at.strftime('%B %d, %Y %I:%M %p') }}
                             </span>
                         </div>
 
