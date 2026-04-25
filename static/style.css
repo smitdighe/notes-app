@@ -654,3 +654,7 @@ button:disabled {
 opacity:0.8;
 cursor:pointer;
 }
+
+.btn:hover{
+transform:translateY(-2px) scale(1.02);
+}
