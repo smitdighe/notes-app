@@ -2,7 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import os
-
+import pytz
+IST = pytz.timezone('Asia/Kolkata')
 # Initialize Flask app
 app = Flask(__name__)
 
@@ -19,8 +20,9 @@ class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
     content = db.Column(db.Text, nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-
+    def get_ist_time():
+        return datetime.now(IST).replace(tzinfo=None)  # Store as naive datetime in IST
+    created_at = db.Column(db.DateTime, default=get_ist_time)
     def __repr__(self):
         return f'<Note {self.id}: {self.title}>'
 

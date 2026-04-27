@@ -40,7 +40,12 @@
 
     <!-- Notes Display Section -->
     <section class="notes-section">
-        <h2>Your Notes {% if notes %}({{ notes|length }}){% endif %}</h2>
+        <h2>
+            Your Notes 
+            {% if notes %}
+                <span style="color:#6366f1">({{ notes|length }})</span>
+            {% endif %}
+        </h2>
 
         {% if notes %}
             <div class="notes-grid">
