@@ -105,5 +105,4 @@ flask-notes-app/
 
 * 🔍 Search & filter notes
 * 🌙 Dark mode
-* 🔐 Authentication system
 
