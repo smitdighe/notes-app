@@ -17,9 +17,13 @@ class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
     content = db.Column(db.Text, nullable=False)
+    
     def get_ist_time():
-        return datetime.now(IST).replace(tzinfo=None)  # Store as naive datetime in IST
+        return datetime.now(IST).replace(tzinfo=None)
+    
     created_at = db.Column(db.DateTime, default=get_ist_time)
+    updated_at = db.Column(db.DateTime, default=get_ist_time, onupdate=get_ist_time)
+    
     def __repr__(self):
         return f'<Note {self.id}: {self.title}>'
 
@@ -81,6 +85,7 @@ def edit(id):
         try:
             note.title = title
             note.content = content
+            note.updated_at = datetime.now(IST).replace(tzinfo=None)
             db.session.commit()
             flash('Note updated successfully!', 'success')
             return redirect(url_for('index'))
