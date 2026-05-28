@@ -29,8 +29,10 @@
                     placeholder="Enter note content..."
                     rows="6"
                     required
+                    maxlength="1000"
+                    oninput="updateCounter(this)"
                 ></textarea>
-                <small style="opacity:0.6;">Max 1000 characters</small>
+                <small id="char-counter" style="opacity:0.6;">0 / 1000 characters</small>
             </div>
 
             <button type="submit" class="btn btn-primary">
@@ -48,12 +50,40 @@
             {% endif %}
         </h2>
 
+        <!-- Search Bar -->
+        <form method="GET" action="{{ url_for('index') }}" style="margin-bottom: 1rem;">
+            <div style="display:flex; gap: 0.75rem;">
+                <input
+                    type="text"
+                    name="q"
+                    value="{{ query or '' }}"
+                    placeholder="🔍 Search notes..."
+                    style="flex:1; padding:0.65rem 1rem; border:2px solid var(--border-color);
+                           border-radius:var(--radius); font-size:1rem; background:var(--bg-color);
+                           color:var(--text-primary);"
+                    autocomplete="off"
+                >
+                {% if query %}
+                    <a href="{{ url_for('index') }}" class="btn btn-secondary" style="padding: 0.65rem 1rem;">✕ Clear</a>
+                {% endif %}
+            </div>
+            {% if query %}
+                <small style="opacity:0.6; margin-top:0.4rem; display:block;">
+                    Showing results for "<strong>{{ query }}</strong>"
+                </small>
+            {% endif %}
+        </form>
+
         {% if notes %}
             <div class="notes-grid">
                 {% for note in notes %}
                     <article class="note-card">
                         <div class="note-header">
-                            <h3 class="note-title">{{ note.title }}</h3>
+                            <h3 class="note-title">
+                                <a href="{{ url_for('view_note', id=note.id) }}" style="color: inherit; text-decoration: none;">
+                                    {{ note.title }}
+                                </a>
+                            </h3>
                             <span class="note-date">
                                 {{ note.created_at.strftime('%B %d, %Y') }}
                             </span>
@@ -79,13 +109,27 @@
             </div>
         {% else %}
             <div class="empty-state">
-                <p class="empty-icon">📭</p>
+                <p class="empty-icon">{% if query %}🔍{% else %}📭{% endif %}</p>
                 <p class="empty-text">
-                    No notes yet. <br>
-                    <span style="opacity: 0.7;">Create your first note to get started 🚀</span>
+                    {% if query %}
+                        No notes found for "<strong>{{ query }}</strong>".<br>
+                        <span style="opacity: 0.7;">Try a different search term.</span>
+                    {% else %}
+                        No notes yet. <br>
+                        <span style="opacity: 0.7;">Create your first note to get started 🚀</span>
+                    {% endif %}
                 </p>
             </div>
         {% endif %}
     </section>
 </div>
+
+<script>
+    function updateCounter(textarea) {
+        const counter = document.getElementById('char-counter');
+        const len = textarea.value.length;
+        counter.textContent = `${len} / 1000 characters`;
+        counter.style.color = len > 900 ? '#ef4444' : '';
+    }
+</script>
 {% endblock %}

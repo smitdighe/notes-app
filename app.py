@@ -43,7 +43,7 @@ def index():
         if not content:
             flash('Content cannot be empty', 'error')
             return redirect(url_for('index'))
-        
+
         if len(content) > 1000:
             flash('Content cannot exceed 1000 characters.', 'error')
             return redirect(url_for('index'))
@@ -59,8 +59,15 @@ def index():
             flash('Error creating note. Please try again.', 'error')
             return redirect(url_for('index'))
 
-    notes = Note.query.order_by(Note.created_at.desc()).all()
-    return render_template('index.html', notes=notes)
+    query = request.args.get('q', '').strip()
+    if query:
+        notes = Note.query.filter(
+            Note.title.ilike(f'%{query}%') | Note.content.ilike(f'%{query}%')
+        ).order_by(Note.created_at.desc()).all()
+    else:
+        notes = Note.query.order_by(Note.created_at.desc()).all()
+
+    return render_template('index.html', notes=notes, query=query)
 
 @app.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit(id):
