@@ -18,9 +18,12 @@ This project demonstrates how to build a complete **server-rendered web app** wi
 
 * 🆕 Create notes with title and content
 * 📖 View all notes in a card layout
+* 🔎 Full detail view for each note
 * ✏️ Edit existing notes
 * 🗑️ Delete notes with confirmation
+* 🔍 Search notes by title or content
 * 🕒 Timestamp for each note
+* 🔢 Live character counter (1000 char limit)
 * ✅ Server-side validation
 * 📱 Fully responsive design
 * 🎨 Clean and modern UI
@@ -103,6 +106,8 @@ flask-notes-app/
 
 ## 🚀 Future Improvements
 
-* 🔍 Search & filter notes
-* 🌙 Dark mode
-
+* 🌙 Dark mode toggle
+* 🏷️ Tags / categories for notes
+* 📌 Pin important notes
+* 📤 Export notes as PDF or Markdown
+* 🔐 User authentication
