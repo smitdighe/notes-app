@@ -8,6 +8,9 @@
         <div class="edit-header">
             <h2>Edit Note</h2>
             <p class="edit-meta">Created: {{ note.created_at.strftime('%B %d, %Y at %I:%M %p') }}</p>
+            {% if note.updated_at and note.updated_at != note.created_at %}
+                <p class="edit-meta">Last edited: {{ note.updated_at.strftime('%B %d, %Y at %I:%M %p') }}</p>
+            {% endif %}
         </div>
 
         <form method="POST" action="{{ url_for('edit', id=note.id) }}" class="note-form">
