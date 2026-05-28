@@ -4,18 +4,15 @@ from datetime import datetime
 import os
 import pytz
 IST = pytz.timezone('Asia/Kolkata')
-# Initialize Flask app
+
 app = Flask(__name__)
 
-# Configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///notes.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'your-secret-key-change-in-production'
 
-# Initialize database
 db = SQLAlchemy(app)
 
-# Database Model
 class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
@@ -26,19 +23,15 @@ class Note(db.Model):
     def __repr__(self):
         return f'<Note {self.id}: {self.title}>'
 
-# Create database tables
 with app.app_context():
     db.create_all()
 
-# Routes
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    """Display all notes and handle creating new notes"""
     if request.method == 'POST':
         title = request.form.get('title', '').strip()
         content = request.form.get('content', '').strip()
 
-        # Validation
         if not title:
             flash('Title cannot be empty', 'error')
             return redirect(url_for('index'))
@@ -46,8 +39,11 @@ def index():
         if not content:
             flash('Content cannot be empty', 'error')
             return redirect(url_for('index'))
+        
+        if len(content) > 1000:
+            flash('Content cannot exceed 1000 characters.', 'error')
+            return redirect(url_for('index'))
 
-        # Create new note
         try:
             note = Note(title=title, content=content)
             db.session.add(note)
@@ -59,20 +55,17 @@ def index():
             flash('Error creating note. Please try again.', 'error')
             return redirect(url_for('index'))
 
-    # Get all notes, ordered by creation date (newest first)
     notes = Note.query.order_by(Note.created_at.desc()).all()
     return render_template('index.html', notes=notes)
 
 @app.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit(id):
-    """Edit an existing note"""
     note = Note.query.get_or_404(id)
 
     if request.method == 'POST':
         title = request.form.get('title', '').strip()
         content = request.form.get('content', '').strip()
 
-        # Validation
         if not title:
             flash('Title cannot be empty', 'error')
             return redirect(url_for('edit', id=id))
@@ -80,8 +73,11 @@ def edit(id):
         if not content:
             flash('Content cannot be empty', 'error')
             return redirect(url_for('edit', id=id))
+        
+        if len(content) > 1000:
+            flash('Content cannot exceed 1000 characters.', 'error')
+            return redirect(url_for('index'))
 
-        # Update note
         try:
             note.title = title
             note.content = content
@@ -97,7 +93,6 @@ def edit(id):
 
 @app.route('/delete/<int:id>', methods=['POST'])
 def delete(id):
-    """Delete a note"""
     note = Note.query.get_or_404(id)
 
     try:
