@@ -69,6 +69,11 @@ def index():
 
     return render_template('index.html', notes=notes, query=query)
 
+@app.route('/note/<int:id>')
+def view_note(id):
+    note = Note.query.get_or_404(id)
+    return render_template('view_note.html', note=note)
+
 @app.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit(id):
     note = Note.query.get_or_404(id)
@@ -119,12 +124,10 @@ def delete(id):
 
 @app.errorhandler(404)
 def not_found(error):
-    """Handle 404 errors"""
     return render_template('404.html'), 404
 
 @app.errorhandler(500)
 def server_error(error):
-    """Handle 500 errors"""
     return render_template('500.html'), 500
 
 if __name__ == '__main__':

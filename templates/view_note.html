@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}{{ note.title }} - Notes App{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    <section class="edit-note-section">
+        <div class="edit-header">
+            <h2>{{ note.title }}</h2>
+            <p class="edit-meta">Created: {{ note.created_at.strftime('%B %d, %Y at %I:%M %p') }}</p>
+            {% if note.updated_at and note.updated_at != note.created_at %}
+                <p class="edit-meta">Last edited: {{ note.updated_at.strftime('%B %d, %Y at %I:%M %p') }}</p>
+            {% endif %}
+        </div>
+
+        <div class="note-content">
+            <p>{{ note.content }}</p>
+        </div>
+
+        <div class="form-actions">
+            <a href="{{ url_for('edit', id=note.id) }}" class="btn btn-secondary">✎ Edit</a>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">← Back to Notes</a>
+        </div>
+    </section>
+</div>
+{% endblock %}
