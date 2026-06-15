@@ -1,7 +1,6 @@
 # 📝 Flask Notes App
 
-🚀 **Live Demo:**  
-👉 https://notes-app-d9cm.onrender.com
+🚀 [Live Demo:](https://notes-app-1-xj1u.onrender.com)
 
 ---
 
